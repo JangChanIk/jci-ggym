@@ -35,8 +35,11 @@ const Footer = () => {
     <Navbar style={{padding:"0px"}} variant="dark">
       <MyDiv>
         <div className="contact__links">
-          <a className="link" href="https://github.com/JangChanIk/MyWeb" target="_blank" rel="noopener noreferrer">
+          <a className="link" href="https://github.com/JangChanIk/jci-ggym" target="_blank" rel="noopener noreferrer">
             <MyI className="fab fa-github"></MyI>
+          </a>
+          <a className="link" href="https://github.com/JangChanIk/Spring-GGYM" target="_blank" rel="noopener noreferrer">
+            <MyI className="fab fa-github-square"></MyI>
           </a>
           <a className="link" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=browny0129@naver.com" target="_blank" rel="noopener noreferrer">
             <MyI className="fas fa-envelope"></MyI>
