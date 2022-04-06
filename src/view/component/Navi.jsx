@@ -18,9 +18,6 @@ const Navi = ({textStyle}) => {
     <>
       <Nav variant="info" className="me-auto">
         <NavDropdown title={<span style={textStyle}>피트니스</span>}>
-          <LinkContainer to={"/intro/gym"}>
-            <NavDropdown.Item>피트니스 소개</NavDropdown.Item>
-          </LinkContainer>  
           <LinkContainer to={"/intro/teacher"}>
             <NavDropdown.Item>강사소개</NavDropdown.Item>
           </LinkContainer>  
@@ -84,6 +81,11 @@ const Navi = ({textStyle}) => {
                   <LinkContainer active={path==="/myInfo/post"?true:false} to={
                     sessionStorage.getItem('auth')==='1'?"/myInfo/post?id=trans&page=1":"/myInfo/post?id=notice&page=1"}>
                     <NavDropdown.Item>내 게시글</NavDropdown.Item>
+                  </LinkContainer>  
+                }
+                { sessionStorage.getItem('auth')==='3'&&
+                  <LinkContainer to={"/mgmt/attend"}>
+                    <NavDropdown.Item>출결체크</NavDropdown.Item>
                   </LinkContainer>  
                 }
               </NavDropdown>

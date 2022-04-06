@@ -4,10 +4,10 @@ import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setToastMsg } from '../../../redux/toastStatus/action';
-import { memberInsertDB, memberListDB, memberUpdateDB } from '../../../service/dbLogic';
-import { linkEmail, logout, onAuthChange, signupEmail, updatePwd } from '../../../service/firebase/authLogic';
+import { memberInsertDB, memberListDB, memberUpdateDB, reSignUserDB } from '../../../service/dbLogic';
+import { linkEmail, logout, onAuthChange, reSignUser, signupEmail, updatePwd } from '../../../service/firebase/authLogic';
 import { checkPassword, validateBirthdate, validateEmail, validateHp, validateName, validateNickname, validatePassword } from '../../../service/validateLogic';
-import { SignupForm, MyH1, MyInput, MyLabel,  MyLabelAb, SubmitButton, MyButton, PwEye} from '../../../styles/FromStyle';
+import { SignupForm, MyH1, MyInput, MyLabel,  MyLabelAb, SubmitButton, MyButton, PwEye, WarningButton} from '../../../styles/FromStyle';
 
 const Signup = ({update}) => {
 
@@ -15,6 +15,7 @@ const Signup = ({update}) => {
   const userAuth = useSelector(state => state.userAuth);
   const dispatch = useDispatch();
   const type = window.location.search.split('&')[0].split('=')[1];
+  const [reSignCheck, setReSignCheck] = useState(false);
   const navigate = useNavigate();
 
   const[submitBtn, setSubmitBtn] = useState({
@@ -30,6 +31,7 @@ const Signup = ({update}) => {
       setSubmitBtn({...submitBtn, hover: true, bgColor: 'rgb(72, 145, 218)'});
     }
   }
+
 
   const[post, setPost] = useState({
     post: "",
@@ -99,7 +101,7 @@ const Signup = ({update}) => {
 
   useEffect(()=> {
     if(update){
-      setTimeout(()=>{window.location.reload()}, 3000000);
+      setTimeout(()=>{window.location.reload()}, 1800000);
     }
   },[update])
 
@@ -213,9 +215,11 @@ const Signup = ({update}) => {
       console.log(response);
       if(response.data===1){
         setComment({...comment, [key]:`해당 ${key==='email'?'이메일':'닉네임'}은 사용할 수 없습니다.`});
+        dispatch(setToastMsg(`해당 ${key==='email'?'이메일':'닉네임'}은 사용할 수 없습니다.`));
         setStar({...star, [key]:"*"});
       } else if(response.data===0) {
-        setComment({...comment, [key]:`해당 ${key==='email'?'이메일':'닉네임'}은 사용할 수 있습니다.`});        
+        setComment({...comment, [key]:`해당 ${key==='email'?'이메일':'닉네임'}은 사용할 수 있습니다.`});
+        dispatch(setToastMsg(`해당 ${key==='email'?'이메일':'닉네임'}은 사용할 수 있습니다.`));        
         setStar({...star, [key]:""});
       }
       
@@ -294,9 +298,10 @@ const Signup = ({update}) => {
 
       if(response.data!==1) {
       return dispatch(setToastMsg("DB 오류: 관리자에게 연락바랍니다."));
-      }
+    }
       sessionStorage.clear();
       navigate('/');
+      return dispatch(setToastMsg("정보가 변경되었습니다."));
     } catch (error) {
       dispatch(setToastMsg(error+" 오류: 관리자에게 연락바랍니다."));
     }
@@ -352,9 +357,10 @@ const Signup = ({update}) => {
 
       if(response.data!==1) {
       return dispatch(setToastMsg("DB 오류: 관리자에게 연락바랍니다."));
-      }
+    }
       sessionStorage.clear();
       navigate('/');
+      return dispatch(setToastMsg("회원가입되었습니다. 감사합니다."));
       
     } catch (error) {
       dispatch(setToastMsg(error+" 오류: 관리자에게 연락바랍니다."));
@@ -368,6 +374,19 @@ const Signup = ({update}) => {
     <Form.Check inline label={item} value={item} name="group1" type='radio' checked={memInfo.gender===item?true:false} readOnly
     id={`inline-radio-${item}`} key={index} onClick={(e)=> {setMemInfo({...memInfo, gender: e.target.value})}}/>
   ))
+
+
+  const reSignAuth = async() => {
+    if(!reSignCheck) return dispatch(setToastMsg("탈퇴 동의에 체크해주세요"));
+    try {
+      await reSignUserDB({MEM_NO: sessionStorage.getItem('no')});
+      await reSignUser(userAuth.auth);
+      navigate('/');
+      dispatch(setToastMsg("탈퇴되었습니다."));
+    } catch (error) {
+      dispatch(setToastMsg("오류입니다."));
+    }
+  }
   
 
   return (
@@ -462,6 +481,15 @@ const Signup = ({update}) => {
             onClick={()=>{if(update){signUpdate()}else{signup()}}} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
               {update?'수정하기':'가입하기'}
             </SubmitButton>
+          { update&&
+            <>
+              <Form.Check type={'checkbox'} id={'checkbox'} name={'checkbox'} style={{margin:'5px'}}
+              label={`정말로 탈퇴하시겠나요?`} onChange={()=>{setReSignCheck(!reSignCheck)}}/>
+              <WarningButton type="button" onClick={()=>{reSignAuth()}}>
+                계정탈퇴
+              </WarningButton>
+            </>
+          }  
         </SignupForm>
       </div>
     </div>

@@ -264,7 +264,7 @@ const PassBuyPage = () => {
           <Card.Footer>
             <div style={{display: 'flex',flexDirection: 'column',alignItems: 'center'}}>
               <Form.Check type={'checkbox'} id={'checkbox'} name={'checkbox'} label={`결제에 동의하시나요?`} style={{margin:'5px'}} onChange={()=>{setBuyCheck(!buyCheck)}}/>
-              <BButton  disabled={submitBtn.disabled} style={{backgroundColor:submitBtn.bgColor, width:"150px", height:"48px"}} onClick={()=>{payment()}}>이용권 결제</BButton>
+              <BButton disabled={submitBtn.disabled} style={{backgroundColor:submitBtn.bgColor, width:"150px", height:"48px"}} onClick={()=>{payment()}}>이용권 결제</BButton>
             </div>
           </Card.Footer>
         </Card>

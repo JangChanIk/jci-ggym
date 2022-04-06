@@ -75,7 +75,7 @@ const ReviewListPage = ({id, page}) => {
       <tr key={index} onClick={()=>{navigate(`/board/detail?id=${id}&bno=${listItem.bno}&page=${page}`);}}>
           <td key={1} style={{textAlign: 'center'}}>{listItem.bno}</td> 
           <td key={4}>
-            {<span><i style={{width:"15px", height:"15px"}} className={listItem.file?"fas fa-image":"fas fa-file-lines"}></i></span>}
+            {<span><i style={{width:"15px", height:"15px"}} className={!listItem.file?"fas fa-file-lines":"fas fa-image"}></i></span>}
             &nbsp;&nbsp;{listItem.title}
             {listItem.comment&&<span style={{fontWeight:"bold"}}>&nbsp;[{listItem.comment}]</span>}</td>
           <td key={5} style={{textAlign: 'center'}}>{listItem.writer}</td> 

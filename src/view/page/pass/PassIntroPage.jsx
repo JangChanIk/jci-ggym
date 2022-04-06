@@ -30,8 +30,10 @@ const PassIntroPage = () => {
         </Card.Header>
         <Card.Body>
           <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
-            <img style={{maxWidth:"600px", width:"100%"}} src="https://i.ibb.co/LrSyfP5/123.png" alt="123" border="0"/>
-            <img style={{maxWidth:"600px", width:"100%"}} src="https://i.ibb.co/WPyBQbW/1234.png" alt="1234" border="0"/>
+            <span style={{fontSize:'30px'}}>헬스 패키지</span>
+            <img style={{width:"100%"}} src="image/회원권2.png" alt="1234" border="0"/>
+            <span style={{fontSize:'30px'}}>수업 패키지</span>
+            <img style={{width:"100%"}} src="image/GX_수정본.png" alt="123" border="0"/>
           </div>
         </Card.Body>
         <Card.Footer>

@@ -1,6 +1,7 @@
 {
   "name": "jci-ggym",
   "version": "0.1.0",
+  "homepage": "http://ggym.asuscomm.com:8000/",
   "private": true,
   "dependencies": {
     "@firebase/auth": "^0.19.11",
@@ -35,6 +36,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "nodemon ./server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

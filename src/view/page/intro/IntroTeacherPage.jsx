@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContainerDiv, FormDiv, HeaderDiv } from '../../../styles/FromStyle';
+import Teacher from '../../component/intro/Teacher';
 
 
 const IntroTeacherPage = () => {
@@ -9,18 +10,7 @@ const IntroTeacherPage = () => {
         <h1 style={{marginLeft:"10px"}}>강사 소개</h1>
       </HeaderDiv>
       <FormDiv>
-        <div style={{ textAlign: "center" }}>
-          <img
-            className="teacher"
-            src="https://i.ibb.co/KKmDRyC/11111.png"
-            alt="Third slide"
-          />
-          <img
-            className="teacher"
-            src="https://i.ibb.co/kmfZx00/2222222.png" 
-            alt="Third slide"
-          />
-        </div>
+        <Teacher/>
       </FormDiv>
     </ContainerDiv>
   );

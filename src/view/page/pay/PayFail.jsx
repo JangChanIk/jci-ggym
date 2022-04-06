@@ -6,7 +6,7 @@ const PayFail = () => {
   const param = useLocation().search;
   console.log(param);
   if(!param){
-    window.parent.location.href="passInfo?state=Fail";
+    window.parent.location.href="pay/passInfo?state=Fail";
   }
 
   return (

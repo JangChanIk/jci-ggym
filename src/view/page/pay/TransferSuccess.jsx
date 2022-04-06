@@ -24,7 +24,7 @@ const TransferSuccess = () => {
       const res = await TransferSuccessDB(list);
       console.log(res);
       if(res.data){
-        window.parent.location.href="transferInfo?state=success&pay_no="+res.data;
+        window.parent.location.href="pay/transferInfo?state=success&pay_no="+res.data;
       }
     }
     toDo();

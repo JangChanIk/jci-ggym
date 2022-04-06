@@ -94,6 +94,13 @@ export const SubmitButton = styled.button`
   color: white;
 `;
 
+export const WarningButton = styled(SubmitButton)`
+  border: none;
+  background-color: rgb(241, 80, 42);
+  color: white;
+  &:hover { background-color: rgb(200, 34, 18) }
+`;
+
 export const GoogleButton = styled(SubmitButton)`
   margin-top: 0px;
   background-color: white;

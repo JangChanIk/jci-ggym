@@ -1,6 +1,6 @@
 import { getAuth, signInWithPopup , GoogleAuthProvider, createUserWithEmailAndPassword, 
   sendEmailVerification, signInWithEmailAndPassword, EmailAuthProvider, linkWithCredential, 
-  sendPasswordResetEmail, reauthenticateWithCredential, updatePassword } from 'firebase/auth';
+  sendPasswordResetEmail, reauthenticateWithCredential, updatePassword, deleteUser } from 'firebase/auth';
 
 
 class AuthLogic {
@@ -128,3 +128,14 @@ export const updatePwd = (auth, newPassword) => {
     });
   });
 };
+
+export const reSignUser = (auth) => {
+  return new Promise((resolve, reject) => {
+    deleteUser(auth.currentUser).then(() => {
+      resolve();
+    }).catch((error) => {
+      reject(error);
+    });
+  });  
+};
+

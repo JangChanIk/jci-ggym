@@ -7,7 +7,6 @@ import { setToastMsg } from './redux/toastStatus/action';
 import Header from './view/component/Header';
 import Footer from './view/component/Footer';
 import HomePage from './view/page/HomePage'
-import IntroGymPage from './view/page/intro/IntroGymPage'
 import IntroTeacherPage from './view/page/intro/IntroTeacherPage'
 import IntroClassPage from './view/page/intro/IntroClassPage'
 import IntroLocationPage from './view/page/intro/IntroLocationPage'
@@ -37,6 +36,7 @@ import TransferInfoPage from './view/page/pay/TransferInfoPage';
 import TransferSuccess from './view/page/pay/TransferSuccess';
 import PassSuccess from './view/page/pay/PassSuccess';
 import PassInfoPage from './view/page/pay/PassInfoPage';
+import AttendPage from './view/page/mgmt/AttendPage';
 
 
 const App = () => {
@@ -67,15 +67,15 @@ const App = () => {
             return;
           }
         }
-        if(!ssg.getItem('auth')) {
+        if(!user.emailVerified){
+          if(pathname!=='/login/emailVerified') {
+            navigate('/login/emailVerified');
+          }
+        } else if(!ssg.getItem('auth')||ssg.getItem('auth')==='undefined') {
           if(pathname!=='/login/signup') {
             dispatch(setToastMsg('해당 구글 계정은 회원가입 대상입니다. 회원가입 부탁드립니다.'));
             navigate('/login/signup');
             
-          }
-        } else if(!user.emailVerified){
-          if(pathname!=='/login/emailVerified') {
-            navigate('/login/emailVerified');
           }
         } else if(ssg.getItem('status')==='0'){
           if(pathname!=='/login/memberVerified') {
@@ -98,14 +98,18 @@ const App = () => {
       {/* <ManagerHeader /> */}
       <div style={{height: 'auto', minHeight: '100%', paddingBottom: '70px'}}>
         {
-          (pathname.match('/pay/transferSuccess')||pathname.match('/pay/passSuccess')||pathname.match('/pay/fail')||pathname.match('/pay/cancel'))||
-          <Header/>
+          ((
+          pathname.match('/mgmt/attend')||
+          pathname.match('/pay/transferSuccess')||
+          pathname.match('/pay/passSuccess')||
+          pathname.match('/pay/fail')||
+          pathname.match('/pay/cancel')))?
+          <></>:<Header/>
         }
         <Routes>
           {/* home */}
           <Route path="/" exact={true} element={<HomePage/>} />
           {/* intro */}
-          <Route path="/intro/gym" exact={true} element={<IntroGymPage/>} />
           <Route path="/intro/teacher" exact={true} element={<IntroTeacherPage/>} />
           <Route path="/intro/class" exact={true} element={<IntroClassPage/>} />
           <Route path="/intro/location" exact={true} element={<IntroLocationPage/>} />
@@ -141,16 +145,17 @@ const App = () => {
           <Route path="/myInfo/payList" exact={true} element={<PayListPage/>} />
           <Route path="/myInfo/post" exact={true} element={<MyPostPage/>} />
           {/* mgmt */}
-          <Route path="/mgmt/product/list" exact={true} element={null} />
-          <Route path="/mgmt/product/update" exact={true} element={null} />
-          <Route path="/mgmt/income/list" exact={true} element={null} />
-          <Route path="/mgmt/member/list" exact={true} element={null} />
-          <Route path="/mgmt/teacher/list" exact={true} element={null} />
+          <Route path="/mgmt/attend" exact={true} element={<AttendPage/>} />
         </Routes> 
       </div>
       {
-        (pathname.match('/pay/transferSuccess')||pathname.match('/pay/passSuccess')||pathname.match('/pay/fail')||pathname.match('/pay/cancel'))||
-        <Footer />    
+        ((
+        pathname.match('/mgmt/attend')||
+        pathname.match('/pay/transferSuccess')||
+        pathname.match('/pay/passSuccess')||
+        pathname.match('/pay/fail')||
+        pathname.match('/pay/cancel')))?    
+        <></>:<Footer />    
       }
     </div>
   );

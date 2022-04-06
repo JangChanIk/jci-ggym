@@ -39,7 +39,7 @@ const Toast = () => {
   
 
   return (
-    <ToastDiv>{toastStatus.msg}</ToastDiv>
+    <ToastDiv>{JSON.stringify(toastStatus.msg)}</ToastDiv>
   );
 };
 

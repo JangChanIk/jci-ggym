@@ -85,7 +85,7 @@ const KAKAOMap = () => {
   return (
     <div style={{display: "flex",flexDirection: "column", alignItems: "center", justifyContent:"space-around"}}>
       <div id="map" ref={kakaomap}
-      style={{maxWidth:"500px", height:"400px", width:"100%", marginBottom:"40px", border:"2px solid lightgray", borderRadius:"20px"}}></div>
+      style={{maxWidth:"500px", height:"400px", width:"100%", marginBottom:"20px", border:"2px solid lightgray", borderRadius:"20px"}}></div>
       <BButton type="button" onClick={()=>{geoloc();}}>현재위치</BButton>
     </div>
   );

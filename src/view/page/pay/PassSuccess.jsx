@@ -20,7 +20,7 @@ const PassSuccess = () => {
       const res = await kakaoPaySuccessDB(list);
       console.log(res)
       if(res.data){
-        window.parent.location.href="passInfo?state=success&pay_no="+res.data;
+        window.parent.location.href="pay/passInfo?state=success&pay_no="+res.data;
       }
     }
     toDo();

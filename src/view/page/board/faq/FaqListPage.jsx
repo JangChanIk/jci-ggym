@@ -78,7 +78,7 @@ const FaqListPage = ({id, page}) => {
           :
           key==='title'?
           <td key={index}>
-            {<span><i style={{width:"15px", height:"15px"}} className={listItem.file?"fas fa-image":"fas fa-file-lines"}></i></span>}
+            {<span><i style={{width:"15px", height:"15px"}} className={isNaN(listItem.file)?"fas fa-file-lines":"fas fa-image"}></i></span>}
             &nbsp;&nbsp;{listItem[key]}</td>
           :
           <td key={index} style={{textAlign: 'center'}}>{listItem[key]}</td>

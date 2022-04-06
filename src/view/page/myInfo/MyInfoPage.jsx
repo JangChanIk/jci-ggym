@@ -34,6 +34,7 @@ const MyInfoPage = () => {
 
 
   const reAuth = async() => {
+    console.log(pwd)
     try {
       const result = await recertification(userAuth.auth, pwd);
       if(result){
