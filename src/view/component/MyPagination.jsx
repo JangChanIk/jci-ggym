@@ -21,7 +21,8 @@ const MyPagination = ({id, rno, page, path}) => {
     setPages(row);
   },[id, rno, page]);
 
-
+  
+  
 
   return (
     <div>
@@ -50,7 +51,7 @@ const MyPagination = ({id, rno, page, path}) => {
           ))
         }
       {
-        page<Math.floor(totalPage/5)*5+1&&
+        page<Math.floor((totalPage-1)/5)*5+1&&
         <>
           <LinkContainer to={path+`?id=${id}&page=${
             (Math.floor(page%5)===0?(Math.floor(page/5)*5)+1:(Math.floor(page/5)*5)+6)}`
