@@ -134,10 +134,16 @@ const App = () => {
           <Route path="/class/appointment" exact={true} element={<ClassAppointmentPage/>} />
           <Route path="/class/schedule" exact={true} element={<ClassSchedulePage/>} />
           {/* login */}
-          <Route path="/login" exact={true} element={<LoginPage/>} />
+          {
+            !sessionStorage.getItem('email')&&
+            <>
+              <Route path="/login" exact={true} element={<LoginPage/>} />
+              <Route path="/login/signup" exact={true} element={<SignupPage/>} />
+            </>
+          }
+
           <Route path="/login/emailVerified" exact={true} element={<EmailVerifiedPage/>} />
           <Route path="/login/memberVerified" exact={true} element={<MemberVerifiedPage/>} />
-          <Route path="/login/signup" exact={true} element={<SignupPage/>} />
           <Route path="/login/findEmail" exact={true} element={<FindEmailPage/>} />
           <Route path="/login/resetPwd" exact={true} element={<ResetPwdPage/>} />
           {/* myInfo */}

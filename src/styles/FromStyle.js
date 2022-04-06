@@ -118,7 +118,7 @@ export const MyButton = styled.button`
   border-radius: 15px;
   font-size: 14px;
   border: 1px solid lightgray;
-  width: 70px;
+  width: 75px;
   &:hover { background-color: lightgray }
 `;
   
