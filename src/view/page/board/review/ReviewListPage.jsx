@@ -46,6 +46,7 @@ const ReviewListPage = ({id, page}) => {
           writer: item.MEM_NICKNAME,
           no: item.MEM_NO,
           date: date,
+          file: item.FILE,
           hit: item.REVIEW_HIT,
           comment: item.COMM_NO,
         };
